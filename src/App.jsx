@@ -7,28 +7,46 @@ const App = () => {
   const [index, setIndex] = useState(0);
   const person = reviews[index];
 
-  const nextPerson = () => {
-    if (index < reviews.length) {
-      setIndex((currIndex) => {
-        return currIndex + 1;
-      });
-    } else {
-      setIndex(0);
+  const checkNumber = (number) => {
+    if (number > reviews.length - 1) {
+      return 0;
     }
+    if (number < 0) {
+      return reviews.length - 1;
+    }
+    return number;
+  };
+
+  const nextPerson = () => {
+    setIndex((currIndex) => {
+      const newIndex = currIndex + 1;
+      return checkNumber(newIndex);
+    });
   };
 
   const prevPerson = () => {
-    if (index > 0) {
-      setIndex(index - 1);
-    } else {
-      setIndex(reviews.length - 1);
-    }
+    setIndex((currIndex) => {
+      const newIndex = currIndex - 1;
+      return checkNumber(newIndex);
+    });
   };
 
-  // useEffect();
+  const randomPerson = () => {
+    let randomNumber = Math.floor(Math.random() * reviews.length);
+    if (randomNumber === index) {
+      randomNumber += 1;
+    }
+    setIndex(checkNumber(randomNumber));
+  };
+
   return (
     <main>
-      <Person {...person} prevPerson={prevPerson} nextPerson={nextPerson} />
+      <Person
+        {...person}
+        prevPerson={prevPerson}
+        nextPerson={nextPerson}
+        randomPerson={randomPerson}
+      />
     </main>
   );
 };

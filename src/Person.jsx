@@ -1,6 +1,15 @@
 import { FaQuoteRight, FaChevronRight, FaChevronLeft } from 'react-icons/fa';
 
-function Person({ id, name, job, image, text, prevPerson, nextPerson }) {
+function Person({
+  id,
+  name,
+  job,
+  image,
+  text,
+  prevPerson,
+  nextPerson,
+  randomPerson,
+}) {
   return (
     <article key={id} className="review">
       <div className="img-container">
@@ -20,6 +29,9 @@ function Person({ id, name, job, image, text, prevPerson, nextPerson }) {
           <FaChevronRight />
         </button>
       </div>
+      <button type="button" className="btn btn-hipster" onClick={randomPerson}>
+        surprise me!
+      </button>
     </article>
   );
 }
